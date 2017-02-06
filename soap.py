@@ -31,21 +31,18 @@ def curensy_to_rub(file):
     for item in curensy_list:
         amount = (float(item[1]))
         Currency = item[2]
-        responce = client. service.ConvertToNum(amount=amount, fromCurrency=Currency, toCurrency='rub', rounding='TRUE')
+        responce = client.service.ConvertToNum(amount=amount, fromCurrency=Currency, toCurrency='rub', rounding='TRUE')
         amount_of_ruble.append(math.ceil(int(responce)))
 
     return sum(amount_of_ruble)
 
 
 def miles_to_km(file):
-
-
-    curensy_list=[]
+    curensy_list = []
     f = open(file_curensy)
     for line in f:
         curensy_list.append(line.split())
 
-    lenght = float(''.join(curensy_list[0][1].split(',')))
     URL_money = 'http://www.webservicex.net/length.asmx?WSDL'
     client = osa.Client(URL_money)
     summ_of_lenght = []
@@ -54,8 +51,7 @@ def miles_to_km(file):
         responce = client.service.ChangeLengthUnit(LengthValue=lenght, fromLengthUnit='Miles',
                                                    rounding='TRUE', toLengthUnit='Kilometers')
         summ_of_lenght.append(responce)
-    return round(sum(summ_of_lenght) ,  2)
-
+    return round(sum(summ_of_lenght), 2)
 
 # Пути файлов принимаемые для функций
 file_temp = r'c:\Users\roman\Documents\GitHub\артем черняков\Lesson_3-4\Homework\temps.txt'
@@ -64,5 +60,5 @@ file_travel = r'c:\Users\roman\Documents\GitHub\артем черняков\Less
 
 # вызов функций и печать
 print('средняя температура недели ', fahrenheit(file_temp), 'C')
-print("общая сумма необходимая для кругосветного путешествия -" , curensy_to_rub(file_travel) , "руб")
-print('суммарное расстояние пути ', miles_to_km(file_travel) , 'километров')
+print("общая сумма необходимая для кругосветного путешествия -" , curensy_to_rub(file_travel), "руб")
+print('суммарное расстояние пути ', miles_to_km(file_travel), 'километров')
